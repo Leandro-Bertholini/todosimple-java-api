@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<!-- É Um objeto com tags com dados do projeto-->
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -16,6 +17,7 @@
 	<properties>
 		<java.version>17</java.version>
 	</properties>
+	<!-- Lista de dependências do projeto-->
 	<dependencies>
 
 		<dependency>
@@ -24,26 +26,31 @@
 		</dependency>
 
 		<dependency>
+		<!-- Trata os dados na camada de perosistência na comunicação com o banco -->
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 		<dependency>
+		<!-- Tras as anotações necessárias para criar um servidor com padrão mvc gerenciando controllers e tudo mais -->
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
 		<dependency>
+		<!-- Reinicia o servidor automaticamente após a alteração, trazendo produtividade -->
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
+		<!-- Banco de dados em memória -->
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
+		<!-- Faz a conexão com o banco de dados -->
 			<groupId>com.mysql</groupId>
 			<artifactId>mysql-connector-j</artifactId>
 			<scope>runtime</scope>
@@ -56,6 +63,7 @@
 	</dependencies>
 
 	<build>
+	<!-- configuração dos plugins do Maven -->
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
