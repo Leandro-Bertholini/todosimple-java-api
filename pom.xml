@@ -30,6 +30,14 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
+
+		<dependency>
+		<!-- Para validar os dados da classe, validar em tempo real e não deixar cair no banco de dados -->
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+
+
 		<dependency>
 		<!-- Tras as anotações necessárias para criar um servidor com padrão mvc gerenciando controllers e tudo mais -->
 			<groupId>org.springframework.boot</groupId>
