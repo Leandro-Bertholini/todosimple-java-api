@@ -5,11 +5,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.lang.Override;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -19,8 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty.Access;
 @Table(name = User.TABLE_NAME)
 public class User {
 
-  // para garantir que as regras das anotações aconteçam com o contrato da
-  // interface(ñ será implementado contrato).
+  
   public interface CreateUser {
   }
 
@@ -37,18 +39,20 @@ public class User {
   @Column(name = "username", length = 100, nullable = false)
   @NotNull(groups = CreateUser.class)
   @NotEmpty(groups = CreateUser.class)
-  @Size(groups = CreateUser.class, min = 2, max = 100) // define caracteres.
+  @Size(groups = CreateUser.class, min = 2, max = 100) 
   private String username;
 
   @Column(name = "password", length = 50, nullable = false)
-  @JsonProperty(access = Access.WRITE_ONLY) // modo escrita e não leitura(ñ retorna a senha para o front)
+  @JsonProperty(access = Access.WRITE_ONLY) 
   @NotNull(groups = { CreateUser.class, UpdateUser.class })
-  @NotEmpty(groups = { CreateUser.class, UpdateUser.class }) // array para verificar, a regra na atualização de senha
+  @NotEmpty(groups = { CreateUser.class, UpdateUser.class }) 
   @Size(groups = { CreateUser.class, UpdateUser.class }, min = 6, max = 50)
   private String password;
 
-  // Não é passado coleções em construtores do spring porque afeta a performance
-  // private List<Task> tasks = new ArrayList<Task>();
+  
+  @OneToMany(mappedBy = "user") 
+  @JsonProperty(access = Access.WRITE_ONLY)
+  private List<Task> tasks = new ArrayList<Task>();
 
   public User() {
   }
@@ -82,6 +86,16 @@ public class User {
   public void setPassword(String password) {
     this.password = password;
   }
+
+
+  public List<Task> getTasks() {
+    return this.tasks;
+  }
+
+  public void setTasks(List<Task> tasks) {
+    this.tasks = tasks;
+  }
+
 
   @Override
   public boolean equals(Object obj) {
