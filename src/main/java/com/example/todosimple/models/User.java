@@ -30,7 +30,6 @@ public class User {
   public static final String TABLE_NAME = "users";
 
   @Id
-  // Para declarar que será a estratégia do identificador único.
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", unique = true)
   private Long id;
@@ -44,8 +43,7 @@ public class User {
   @Column(name = "password", length = 50, nullable = false)
   @JsonProperty(access = Access.WRITE_ONLY) // modo escrita e não leitura(ñ retorna a senha para o front)
   @NotNull(groups = { CreateUser.class, UpdateUser.class })
-  @NotEmpty(groups = { CreateUser.class, UpdateUser.class }) // array para verificar, também, a regra na atualização de
-                                                             // senha
+  @NotEmpty(groups = { CreateUser.class, UpdateUser.class }) // array para verificar, a regra na atualização de senha
   @Size(groups = { CreateUser.class, UpdateUser.class }, min = 6, max = 50)
   private String password;
 
@@ -91,9 +89,8 @@ public class User {
       return true;
     if (obj == null)
       return false;
-    if (!(obj instanceof User)) {
+    if (!(obj instanceof User)) 
       return false;
-    }
 
     User other = (User) obj;
     if (this.id == null)
